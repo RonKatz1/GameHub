@@ -5,26 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-public class IndexActivity extends AppCompatActivity {
+public class SinglePlayerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index);
+        setContentView(R.layout.activity_single_player);
 
-
-        findViewById(R.id.singleBtn).setOnClickListener(new View.OnClickListener () {
+        findViewById(R.id.coinId).setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick (View v){
-                Intent intent = new Intent(IndexActivity.this ,SinglePlayerActivity.class);
+                Intent intent = new Intent(SinglePlayerActivity.this ,GrabCoinActivity.class);
                 startActivity(intent);
 
 
             }
         });
-
-
     }
 }
