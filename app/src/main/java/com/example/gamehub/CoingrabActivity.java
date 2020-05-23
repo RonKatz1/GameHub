@@ -2,16 +2,23 @@ package com.example.gamehub;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GestureDetectorCompat;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,14 +37,14 @@ public class CoingrabActivity extends AppCompatActivity {
 
 
     // Duration of a game in ms
-    private final int GAME_TIMER_START_VALUE = 15000;
+    private final int GAME_TIMER_START_VALUE = 10000;
     // UI update interval in ms
     private final int GAME_TIMER_TICK_VALUE = 100;
     // Initial delay when new game starts
     private final int NEW_GAME_DELAY = 300;
 
     //for hand movement
-    // private GestureDetectorCompat mDetector;
+     private GestureDetectorCompat mDetector;
 
     private ImageView player;
     private ImageView coin;
@@ -47,7 +54,8 @@ public class CoingrabActivity extends AppCompatActivity {
     private Timer timer;
     private int timeRemaining;
 
-    //SoundManager soundManager = new SoundManager();
+    //creating class object for sound options
+    SoundManager soundManager = new SoundManager();
 
 
     private int moveX;
@@ -58,8 +66,18 @@ public class CoingrabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coingrab);
 
+        //"grabing" player and coin images
         player = findViewById(R.id.playerId);
         coin = findViewById(R.id.coinId);
+
+        //using created  class MySimpleGestureListener
+        mDetector = new GestureDetectorCompat(this, new MySimpleGestureListener(this));
+
+        // Use AudioManager to get max volume
+        AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        soundManager.initSoundPool(this, maxVolume);
+
 
         ConstraintLayout mainLayout = findViewById(R.id.coingrabLayout);
         mainLayout.post(new Runnable() {
@@ -68,6 +86,12 @@ public class CoingrabActivity extends AppCompatActivity {
                 startNewGame();
             }
         });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
     @Override
@@ -181,6 +205,18 @@ public class CoingrabActivity extends AppCompatActivity {
 
         coin.setX(x);
         coin.setY(y);
+
+
+        ObjectAnimator mover = ObjectAnimator.ofFloat(coin , "translationY", 400f, 0f);
+        mover.setDuration(3500);
+
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(coin ,"alpha", 0f, 1f);
+        fadeIn.setDuration(3500);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(fadeIn).with(mover);
+        animatorSet.start();
+
+
     }
 
 
@@ -215,7 +251,8 @@ public class CoingrabActivity extends AppCompatActivity {
         updateScore();
         moveCoin();
 
-        //soundManager.startMusic(this);
+        //start background music whenh game starts
+        soundManager.startMusic(this);
     }
     //function checks if player reached the current coin on screen
     private void checkCollision() {
@@ -229,9 +266,11 @@ public class CoingrabActivity extends AppCompatActivity {
 
         // collision is detected
         if (Rect.intersects(rectPlayer, rectCoin)) {
-            // do collision action
-            // soundManager.performSound();
+            // load coin sound
+            soundManager.performSound();
+            //move coin to a new locaton
             moveCoin();
+            //updates the current score
             updateScore();
         }
     }
@@ -249,9 +288,11 @@ public class CoingrabActivity extends AppCompatActivity {
         // disable buttons logic
         changeAllButtonsEnablement(false);
 
-        //soundManager.stopMusic();
+        //stop background music when game ends
+        soundManager.stopMusic();
 
-        //performVibration();
+        //vibration for game ending
+        performVibration();
 
 
     }
@@ -269,5 +310,14 @@ public class CoingrabActivity extends AppCompatActivity {
     private void showHighScore() {
         // Toast.makeText(this, getString(R.string.message_no_highscore_yet),
         //        Toast.LENGTH_SHORT).show();
+    }
+    private void performVibration() {
+        // Get Vibrator from the current Context
+        Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+
+        // Vibrate for 500 milliseconds
+        if (vibrator.hasVibrator()) {
+            vibrator.vibrate(500);
+        }
     }
 }
