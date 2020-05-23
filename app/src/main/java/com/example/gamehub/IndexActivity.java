@@ -18,7 +18,7 @@ public class IndexActivity extends AppCompatActivity {
         findViewById(R.id.singleBtn).setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick (View v){
-                Intent intent = new Intent(IndexActivity.this ,SinglePlayerActivity.class);
+                Intent intent = new Intent(IndexActivity.this ,SingleplayerActivity.class);
                 startActivity(intent);
 
 

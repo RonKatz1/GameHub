@@ -6,17 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class SinglePlayerActivity extends AppCompatActivity {
+public class SingleplayerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_player);
+        setContentView(R.layout.activity_singleplayer);
 
-        findViewById(R.id.coinId).setOnClickListener(new View.OnClickListener () {
+        findViewById(R.id.coingrabId).setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick (View v){
-                Intent intent = new Intent(SinglePlayerActivity.this ,GrabCoinActivity.class);
+                Intent intent = new Intent(SingleplayerActivity.this ,CoingrabActivity.class);
                 startActivity(intent);
 
 

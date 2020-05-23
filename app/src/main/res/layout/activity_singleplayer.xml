@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".SinglePlayerActivity">
+    tools:context=".SingleplayerActivity">
 
     <Button
-        android:id="@+id/coinId"
-        android:layout_width="77dp"
-        android:layout_height="71dp"
-        android:layout_marginStart="81dp"
-        android:layout_marginLeft="81dp"
-        android:layout_marginTop="175dp"
+        android:id="@+id/coingrabId"
+        android:layout_width="64dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginLeft="103dp"
+        android:layout_marginTop="207dp"
         android:background="@drawable/coin"
-        android:text="Grab Coin"
+        android:text="coin grab"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
