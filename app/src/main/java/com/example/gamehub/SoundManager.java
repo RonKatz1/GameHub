@@ -8,9 +8,9 @@ import android.media.SoundPool;
 // this class was created  for the use of coin grab game only
 class SoundManager {
 
-    private MediaPlayer mp;
+    private MediaPlayer mp;        //var for the background music
     private SoundPool soundPool;
-    private int soundID;
+    private int soundID;           //var for coin grab sound
     private float maxVolume;
     boolean loaded = false;
     Context context;
@@ -40,6 +40,10 @@ class SoundManager {
         mp = null;
     }
 
+    void stopGrab() {
+
+        loaded=false;
+    }
     void initSoundPool(Context context, float maxVolume) {
         this.context = context;
         this.maxVolume = maxVolume;

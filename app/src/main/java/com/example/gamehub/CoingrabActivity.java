@@ -30,14 +30,16 @@ import java.util.TimerTask;
 
 public class CoingrabActivity extends AppCompatActivity {
 
-
+    //variable for player movement per move
     private static final int MOVE_DELTA = 20;
+    //player spawn coordinates X axis
     private static final int PLAYER_START_X = 250;
+    //player spawn coordinates Y axis
     private static final int PLAYER_START_Y = 100;
 
 
     // Duration of a game in ms
-    private final int GAME_TIMER_START_VALUE = 10000;
+    private final int GAME_TIMER_START_VALUE = 5000;
     // UI update interval in ms
     private final int GAME_TIMER_TICK_VALUE = 100;
     // Initial delay when new game starts
@@ -46,11 +48,13 @@ public class CoingrabActivity extends AppCompatActivity {
     //for hand movement
      private GestureDetectorCompat mDetector;
 
+     //player and coin
     private ImageView player;
     private ImageView coin;
 
     private int score = 0;
 
+    //timer variable
     private Timer timer;
     private int timeRemaining;
 
@@ -58,8 +62,12 @@ public class CoingrabActivity extends AppCompatActivity {
     SoundManager soundManager = new SoundManager();
 
 
+    //variables for concurring playe direction
     private int moveX;
     private int moveY;
+
+    //boolean var for leaving game before it is ending
+    private boolean bol = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +87,7 @@ public class CoingrabActivity extends AppCompatActivity {
         soundManager.initSoundPool(this, maxVolume);
 
 
+        //on load start new game by layout id
         ConstraintLayout mainLayout = findViewById(R.id.coingrabLayout);
         mainLayout.post(new Runnable() {
             @Override
@@ -94,6 +103,7 @@ public class CoingrabActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
+    //function display the menu created for this game
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -101,6 +111,7 @@ public class CoingrabActivity extends AppCompatActivity {
         return true;
     }
 
+    //function sort out option for the menu created for this game
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -109,19 +120,14 @@ public class CoingrabActivity extends AppCompatActivity {
                 return true;
 
             case R.id.quit:
+                if (!bol){
+                    gameEnded();
+                }
+
                 Intent intent = new Intent(CoingrabActivity.this ,SingleplayerActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
-
-            case R.id.menuShowHighScore:
-                //showHighScore();
-                return true;
-
-            case R.id.avengers:
-                //avengers();
-                return true;
-
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -131,7 +137,7 @@ public class CoingrabActivity extends AppCompatActivity {
 
 
 
-
+    //handler for timer, movement and game ending by time remaining
     public Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -144,13 +150,14 @@ public class CoingrabActivity extends AppCompatActivity {
 
             // if time to finish the game
             if (timeRemaining <= 0) {
+                bol = true;
                 gameEnded();
             }
 
             return true;
         }});
 
-
+    //function checks if the move is legal and enables concurring movement according to the result
     private void doMove() {
         // get window size
         ConstraintLayout mainLayout = findViewById(R.id.coingrabLayout);
@@ -162,28 +169,33 @@ public class CoingrabActivity extends AppCompatActivity {
             player.setX(futureX);
             player.setY(futureY);
         }
-
+        //check for player and coin collision
         checkCollision();
     }
 
 
+    //onclick button left
     public void doLeft(View view) {
         setPlayerMovement(MOVE_DELTA * -1, 0);
     }
 
+    //setting concurring direction
     private void setPlayerMovement(int x, int y) {
         moveX = x;
         moveY = y;
     }
 
+    //onclick button right
     public void doRight(View view) {
         setPlayerMovement(MOVE_DELTA, 0);
     }
 
+    //onclick button up
     public void doUp(View view) {
         setPlayerMovement(0, MOVE_DELTA * -1);
     }
 
+    //onclick button down
     public void doDown(View view) {
         setPlayerMovement(0, MOVE_DELTA);
     }
@@ -199,6 +211,7 @@ public class CoingrabActivity extends AppCompatActivity {
         int maxHeight = displayMetrics.heightPixels;
         int maxWidth = displayMetrics.widthPixels;
 
+        //identifing button for limiting coin spawn location
         Button btnUp = findViewById(R.id.btnUp);
         int x = randomGenerator.nextInt(maxWidth - coin.getWidth());
         int y = randomGenerator.nextInt(maxHeight - (int)btnUp.getY());
@@ -207,19 +220,26 @@ public class CoingrabActivity extends AppCompatActivity {
         coin.setY(y);
 
 
+        //animation for spawned coin on Y axis
         ObjectAnimator mover = ObjectAnimator.ofFloat(coin , "translationY", 400f, 0f);
         mover.setDuration(3500);
 
+        //animation for spawned coin FADES IN
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(coin ,"alpha", 0f, 1f);
         fadeIn.setDuration(3500);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(fadeIn).with(mover);
+
+        //animatorSet.play(fadeIn).with(mover);  //using both animations
+
+        //using only the FADE IN  animation
+        animatorSet.play(fadeIn);
+
         animatorSet.start();
 
 
     }
 
-
+    //function starts a new game
     private void startNewGame() {
 
         moveX = 0;
@@ -227,6 +247,12 @@ public class CoingrabActivity extends AppCompatActivity {
 
         player.setX(PLAYER_START_X);
         player.setY(PLAYER_START_Y);
+
+        //restart coin apperance
+        coin.setVisibility(View.VISIBLE);
+
+        //resetting boolean
+        bol = false;
 
         // restart game timer
         if (timer != null) {
@@ -281,7 +307,7 @@ public class CoingrabActivity extends AppCompatActivity {
         TextView textScore = findViewById(R.id.txtScore);
         textScore.setText("the score is: " + score);
     }
-
+    //function ends current game and all animations
     private void gameEnded() {
         timer.cancel();
 
@@ -294,23 +320,24 @@ public class CoingrabActivity extends AppCompatActivity {
         //vibration for game ending
         performVibration();
 
+        coin.setVisibility(View.GONE);
+
 
     }
+    //function disables/enables all buttons
     private void changeAllButtonsEnablement(boolean isEnabled) {
         changeButtonEnablement(R.id.btnUp, isEnabled);
         changeButtonEnablement(R.id.btnDown, isEnabled);
         changeButtonEnablement(R.id.btnLeft, isEnabled);
         changeButtonEnablement(R.id.btnRight, isEnabled);
     }
-
+    //function  disables/enables specific button
     private void changeButtonEnablement(int buttonID, boolean isEnabled) {
         Button button = findViewById(buttonID);
         button.setEnabled(isEnabled);
     }
-    private void showHighScore() {
-        // Toast.makeText(this, getString(R.string.message_no_highscore_yet),
-        //        Toast.LENGTH_SHORT).show();
-    }
+
+    //function activates vibration
     private void performVibration() {
         // Get Vibrator from the current Context
         Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);

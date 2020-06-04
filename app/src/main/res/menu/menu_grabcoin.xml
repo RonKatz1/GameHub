@@ -4,13 +4,9 @@
     <item
         android:id="@+id/new_game"
         android:title="Start New Game"/>
-    <item
-        android:id="@+id/menuShowHighScore"
-        android:title="Show Highest Score"/>
+
     <item
         android:id="@+id/quit"
         android:title="Return to Single Games"/>
-    <item
-        android:id="@+id/avengers"
-        android:title="Whatever It Takes"/>
+
 </menu>
