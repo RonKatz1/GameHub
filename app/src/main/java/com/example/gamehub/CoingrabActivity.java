@@ -237,6 +237,7 @@ public class CoingrabActivity extends AppCompatActivity {
         animatorSet.start();
 
 
+
     }
 
     //function starts a new game
