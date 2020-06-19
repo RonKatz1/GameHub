@@ -8,6 +8,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 import java.util.Timer;
@@ -58,6 +61,7 @@ public class CoingrabActivity extends AppCompatActivity {
     private Timer timer;
     private int timeRemaining;
 
+
     //creating class object for sound options
     SoundManager soundManager = new SoundManager();
 
@@ -68,6 +72,18 @@ public class CoingrabActivity extends AppCompatActivity {
 
     //boolean var for leaving game before it is ending
     private boolean bol = false;
+
+
+
+
+    //variable for SharedPreferences highest score
+    public static final String  prHS="i";
+
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +111,12 @@ public class CoingrabActivity extends AppCompatActivity {
                 startNewGame();
             }
         });
+
+
+
+
+
+
     }
 
     @Override
@@ -119,6 +141,9 @@ public class CoingrabActivity extends AppCompatActivity {
                 startNewGame();
                 return true;
 
+            case R.id.high_score:
+                showHighScore();
+                return true;
             case R.id.quit:
                 if (!bol){
                     gameEnded();
@@ -323,8 +348,34 @@ public class CoingrabActivity extends AppCompatActivity {
 
         coin.setVisibility(View.GONE);
 
+        //accessing SharedPreferences via SHARED_PREF name
+        SharedPreferences sp =getSharedPreferences("SHARED_PREF",0);
+        //accessing SharedPreferences currently saved highest score
+        String st= sp.getString(prHS,"0");
+        //if player ended the game with a score higher then currently highest score
+        if (Integer.parseInt(st) < score){
+            saveDate();// update saved highest score
+        }
+        //saveDate();
+
 
     }
+    //function saves SharedPreferences highest score
+    public void saveDate(){
+        //accessing SharedPreferences via SHARED_PREF name
+        SharedPreferences sp =getSharedPreferences("SHARED_PREF",0);
+        SharedPreferences.Editor editor= sp.edit();
+        //saving score value in sring key prHS
+        editor.putString(prHS,String.valueOf(score));
+        //saving changes
+        editor.commit();
+
+
+
+    }
+
+
+
     //function disables/enables all buttons
     private void changeAllButtonsEnablement(boolean isEnabled) {
         changeButtonEnablement(R.id.btnUp, isEnabled);
@@ -348,4 +399,14 @@ public class CoingrabActivity extends AppCompatActivity {
             vibrator.vibrate(500);
         }
     }
+
+    private void showHighScore(){
+        SharedPreferences sp =getSharedPreferences("SHARED_PREF",0);
+        String st= sp.getString(prHS,"0");
+        //Toast.makeText(CoingrabActivity.this, st, Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(CoingrabActivity.this,"highest score is: "+st, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
 }
+
