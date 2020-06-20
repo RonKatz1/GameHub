@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GameHub</string>
+    <string name="current_score">Score: %s</string>
+    <string name="last_score">Last score: %s</string>
+    <string name="prompt">Touch to start</string>
+    <string name="congratulations">Congratulations, you finished the game</string>
+
 </resources>
