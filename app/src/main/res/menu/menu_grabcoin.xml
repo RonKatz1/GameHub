@@ -6,6 +6,9 @@
         android:title="Start New Game"/>
 
     <item
+        android:id="@+id/high_score"
+        android:title="show highest score"/>
+    <item
         android:id="@+id/quit"
         android:title="Return to Single Games"/>
 
