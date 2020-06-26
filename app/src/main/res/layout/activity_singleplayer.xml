@@ -10,12 +10,14 @@
     <Button
         android:id="@+id/coingrabId"
         android:layout_width="64dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="103dp"
-        android:layout_marginLeft="103dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginLeft="172dp"
         android:layout_marginTop="207dp"
+        android:layout_marginBottom="101dp"
         android:background="@drawable/coin"
-        android:text="coin grab"
+        android:text="@string/coin_grab"
+        app:layout_constraintBottom_toTopOf="@+id/FlappyBirdBtn1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <Button
@@ -28,4 +30,16 @@
         android:background="@drawable/snake"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/FlappyBirdBtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginBottom="318dp"
+        android:text="@string/flappy_bird"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coingrabId" />
 </androidx.constraintlayout.widget.ConstraintLayout>

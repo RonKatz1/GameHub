@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ReturnToMainMenuBtn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".FlappyBirdGameOver">
+
+
+    <TextView
+        android:id="@+id/GameOverID"
+        android:layout_width="181dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/game_over"
+        android:textColor="#E91E63"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/StartOverBtn"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="85dp"
+        android:layout_marginRight="85dp"
+        android:layout_marginBottom="237dp"
+        android:onClick="StartOver"
+        android:text="@string/start_again"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/ReturnToMenuBtn"
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="136dp"
+        android:onClick="ReturnToMenu"
+        android:text="@string/return_to_menu" />
+
+<!--    <TextView
+        android:id="@+id/UserScoreTextID"
+        android:layout_width="203dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="102dp"
+        android:layout_marginLeft="102dp"
+        android:layout_marginTop="283dp"
+        android:text="@string/your_score_is"
+        android:textColor="#1B3098"
+        android:textSize="30sp" />-->
+</RelativeLayout>

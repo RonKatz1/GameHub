@@ -5,4 +5,11 @@
     <string name="prompt">Touch to start</string>
     <string name="congratulations">Congratulations, you finished the game</string>
 
+    <string name="coin_grab">coin grab</string>
+    <string name="flappy_bird">Flappy Bird</string>
+    <string name="todo">TODO</string>
+    <string name="start_again">Start Again :)</string>
+    <string name="game_over">Game Over!</string>
+    <string name="return_to_menu">Return To Menu</string>
+    <string name="your_score_is">Your Score Is:</string>
 </resources>

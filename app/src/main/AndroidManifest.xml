@@ -4,6 +4,7 @@
     package="com.example.gamehub">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+        <activity android:name=".FlappyBird" />
+        <activity android:name=".CoingrabActivity" />
         <activity android:name=".SingleplayerActivity" />
         <activity android:name=".MultiplayerActivity" />
         <activity android:name=".IndexActivity" />
@@ -24,6 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".StartFlappyBirdGame" />
+        <activity android:name=".FlappyBirdGameOver"></activity>
     </application>
 
 </manifest>
