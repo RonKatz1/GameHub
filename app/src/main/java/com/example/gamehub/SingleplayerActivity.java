@@ -18,8 +18,14 @@ public class SingleplayerActivity extends AppCompatActivity {
             public void onClick (View v){
                 Intent intent = new Intent(SingleplayerActivity.this ,CoingrabActivity.class);
                 startActivity(intent);
+            }
+        });
 
-
+        findViewById(R.id.FlappyBirdBtn1).setOnClickListener(new View.OnClickListener () {
+            @Override
+            public void onClick (View v){
+                Intent intent = new Intent(SingleplayerActivity.this , FlappyBird.class);
+                startActivity(intent);
             }
         });
 
