@@ -3,4 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="background">@android:color/black</color>
+    <color name="controllers">#88303F9F</color>
+    <color name="foodfood">#FF4081</color>
+    <color name="snake">@android:color/green</color>
+    <color name="text">@android:color/white</color>
 </resources>

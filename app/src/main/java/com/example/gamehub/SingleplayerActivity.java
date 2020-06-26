@@ -28,5 +28,15 @@ public class SingleplayerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.snakeId).setOnClickListener(new View.OnClickListener () {
+            @Override
+            public void onClick (View v){
+                Intent intent = new Intent(SingleplayerActivity.this ,SnakeActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
     }
 }

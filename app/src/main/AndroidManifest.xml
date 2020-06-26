@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.gamehub">
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -16,6 +17,9 @@
         <activity android:name=".SingleplayerActivity" />
         <activity android:name=".MultiplayerActivity" />
         <activity android:name=".IndexActivity" />
+        <activity android:name=".CoingrabActivity"/>
+        <activity android:name=".SnakeActivity" android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
