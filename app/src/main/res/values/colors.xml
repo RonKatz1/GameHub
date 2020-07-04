@@ -6,6 +6,6 @@
     <color name="background">@android:color/black</color>
     <color name="controllers">#88303F9F</color>
     <color name="foodfood">#FF4081</color>
-    <color name="snake">@android:color/green</color>
+    <color name="snake">#00F03C</color>
     <color name="text">@android:color/white</color>
 </resources>

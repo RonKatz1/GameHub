@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
         android:layout_marginLeft="148dp"
-        android:layout_marginBottom="318dp"
+        android:layout_marginBottom="200dp"
         android:text="@string/flappy_bird"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
