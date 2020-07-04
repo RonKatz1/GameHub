@@ -8,29 +8,38 @@
     tools:context=".SingleplayerActivity">
 
     <Button
-        android:id="@+id/coingrabId"
-        android:layout_width="0dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="101dp"
-        android:layout_marginLeft="101dp"
-        android:layout_marginEnd="102dp"
-        android:layout_marginRight="102dp"
-        android:background="@drawable/coin"
-        android:text="@string/coin_grab"
-        app:layout_constraintBaseline_toBaselineOf="@+id/FlappyBirdBtn1"
-        app:layout_constraintEnd_toStartOf="@+id/FlappyBirdBtn1"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/FlappyBirdBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginBottom="412dp"
         android:background="@drawable/bird1"
         android:text="@string/flappy_bird"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/coingrabId"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/coingrabId"
+        android:layout_width="85dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginBottom="408dp"
+        android:background="@drawable/coin"
+        android:text="@string/coin_grab"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/snakeId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="412dp"
+        android:background="@drawable/snake"
+        android:text="snake"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/FlappyBirdBtn1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/coingrabId" />
 </androidx.constraintlayout.widget.ConstraintLayout>
