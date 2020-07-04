@@ -1,8 +1,11 @@
 package com.example.gamehub;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,39 +13,29 @@ import com.example.gamehub.snake.GameStage;
 
 public class SnakeActivity extends AppCompatActivity {
 
-    private GameStage _gameStage;
+    private GameStage gameStage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Get the pixel dimensions of the screen
         Display display = getWindowManager().getDefaultDisplay();
-
-        // Initialize the result into a Point object
         Point size = new Point();
         display.getSize(size);
-
-        // Create a game stage
-        _gameStage = new GameStage(this, size);
-
-        // Set game stage as view
-        setContentView(_gameStage);
+        SharedPreferences prefs = getSharedPreferences(
+                "com.example.gamehub", Context.MODE_PRIVATE);
+        gameStage = new GameStage(this, size, prefs);
+        setContentView(gameStage);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Start game stage thread
-        _gameStage.resume();
+        gameStage.resume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-        // Stop game stage thread
-        _gameStage.pause();
+        gameStage.pause();
     }
 }

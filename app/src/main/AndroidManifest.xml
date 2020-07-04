@@ -17,13 +17,12 @@
         <activity android:name=".SingleplayerActivity" />
         <activity android:name=".MultiplayerActivity" />
         <activity android:name=".IndexActivity" />
-        <activity android:name=".CoingrabActivity"/>
         <activity android:name=".SnakeActivity" android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
