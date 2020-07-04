@@ -36,6 +36,7 @@ public class SingleplayerActivity extends AppCompatActivity {
                 startActivity(intent);
 
 
+
             }
         });
     }
